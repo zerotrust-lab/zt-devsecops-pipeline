@@ -1,0 +1,29 @@
+flowchart TD
+    Dev([Developer Push / PR]) --> G1
+
+    subgraph CI["GitHub Actions -- Zero-Trust CI (OIDC, no static secrets)"]
+        direction TB
+        G1["Gate 1: SAST & Lint<br/>Semgrep + go vet"]
+        G2["Gate 2: Dockerfile Audit<br/>Hadolint"]
+        G3["Gate 3: Build + Container Scan<br/>Buildx multi-arch + Trivy<br/>FAIL on CRITICAL/HIGH"]
+        G4["Gate 4: SBOM Generation<br/>Syft SPDX + CycloneDX"]
+        G5["Gate 5: Keyless Signing<br/>Cosign OIDC + Attestations"]
+        G6["Gate 6: Policy-as-Code Gate<br/>OPA / Conftest"]
+        G1 --> G2 --> G3 --> G4 --> G5 --> G6
+    end
+
+    Dev -. "OIDC token (short-lived)" .-> KMS[("AWS KMS / IAM<br/>OIDC Trust")]
+    KMS -. "assume role" .-> CI
+
+    G3 -. "scan results (SARIF)" .-> DD[("GitHub Security")]
+    G4 -. "SBOM artifacts" .-> DD
+
+    G6 -->|"PASS: all evidence valid"| REG[("Amazon ECR<br/>Immutable Tags")]
+    G6 -->|"FAIL: block build"| STOP(["Build Rejected<br/>merge blocked"])
+
+    REG --> Verify["Deploy-time Verification<br/>cosign verify by digest"]
+    Verify --> Prod([Production])
+
+    Rekor[("Sigstore Rekor<br/>Transparency Log")]
+    G5 -. "record signature" .-> Rekor
+    Verify -. "check inclusion" .-> Rekor

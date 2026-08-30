@@ -1,0 +1,26 @@
+name: Security Findings Summary
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"   # Mondays 08:00 UTC -- weekly posture report
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  security-events: read
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Summarize open code-scanning alerts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: python scripts/parse_scan_results.py --repo "$REPO" --fail-on-critical

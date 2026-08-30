@@ -1,0 +1,9 @@
+{
+  "image": {
+    "user": "root",
+    "digest": "latest",
+    "signed": false,
+    "sbom_attested": false,
+    "base_image": "ubuntu:22.04"
+  }
+}

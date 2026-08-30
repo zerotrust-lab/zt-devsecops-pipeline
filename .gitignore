@@ -1,0 +1,29 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+!*.tfvars.example
+tfplan
+
+# Go
+/app/app
+*.test
+*.out
+
+# Build + scan artifacts
+sbom.*.json
+*.sarif
+policy_input.json
+
+# Audit artifacts (created by tests/audit/*.sh)
+app/zz_audit_vuln.go
+build/Dockerfile.insecure
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store

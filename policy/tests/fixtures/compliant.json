@@ -1,0 +1,9 @@
+{
+  "image": {
+    "user": "65532",
+    "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "signed": true,
+    "sbom_attested": true,
+    "base_image": "gcr.io/distroless/static-debian12"
+  }
+}

@@ -1,0 +1,11 @@
+failure-threshold: warning
+trustedRegistries:
+  - docker.io
+  - gcr.io
+ignored:
+  # DL3059 relates to consecutive RUN in the builder stage, which is discarded.
+  - DL3059
+override:
+  error:
+    - DL3002   # do not switch back to root after USER
+    - DL3025   # use exec form for ENTRYPOINT/CMD

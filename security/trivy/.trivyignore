@@ -1,0 +1,3 @@
+# Format: CVE-ID  # reason -- owner -- review-by-date
+# Every entry must be justified, owned, and time-boxed. Never a dumping ground.
+# CVE-2024-00000  # false positive in test-only dep -- @dev-c -- review 2026-09-01
