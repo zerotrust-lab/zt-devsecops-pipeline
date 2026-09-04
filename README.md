@@ -79,4 +79,5 @@ tier for a ~15 MB image. Run `terraform destroy` when finished.
 
 ## Team
 
-See `docs/TEAM.md` for the four-person split, daily checklist, and blockers.
+See `docs/DAY0-SETUP.md` first, then `docs/TEAM.md` for the four-person split,
+daily checklist, and common blockers.

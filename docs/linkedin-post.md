@@ -7,7 +7,7 @@ the repo link in the FIRST COMMENT (links in the body suppress reach).
 
 I built a Zero-Trust DevSecOps pipeline where no image reaches production without cryptographic proof of what it is, what's inside it, and who built it. Here's the architecture. 🔐👇
 
-Most CI/CD pipelines run on implicit trust — if it came from CI, ship it. That assumption is exactly how software supply chain attacks (SolarWinds, Codecov, XZ) succeed. So my team of 4 rebuilt the pipeline on one principle: never trust, always verify — at every stage.
+Most CI/CD pipelines run on implicit trust — if it came from CI, ship it. That assumption is exactly how software supply chain attacks (SolarWinds, Codecov, XZ) succeed. So my team rebuilt the pipeline on one principle: never trust, always verify — at every stage.
 
 🏗 The architecture
 → Go microservice on distroless, running as non-root UID 65532
