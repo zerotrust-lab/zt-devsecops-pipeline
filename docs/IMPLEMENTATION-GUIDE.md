@@ -1193,7 +1193,7 @@ deny contains msg if {
 
 ```bash
 # Both
-opa test policy/ -v
+opa test policy/ --ignore '*.json' -v
 ```
 
 Expect **11 tests, all passing** — seven core rule tests and four field-presence tests. Then

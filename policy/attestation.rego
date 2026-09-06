@@ -1,6 +1,5 @@
-# METADATA
-# title: Supply-chain attestation policy
-# description: Requires a signed SBOM attestation to be present on the image.
+# Supply-chain attestation policy
+# Requires the sbom_attested field to be present and a signed SBOM attestation to exist.
 package main
 
 import rego.v1
