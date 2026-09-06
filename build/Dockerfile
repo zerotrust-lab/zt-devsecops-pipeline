@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.7
 
 ########################  Stage 1: build  ########################
-FROM golang:1.22-bookworm AS builder
+FROM golang:1.26-bookworm AS builder
 
 WORKDIR /src
 
