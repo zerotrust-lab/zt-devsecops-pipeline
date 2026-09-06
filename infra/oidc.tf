@@ -29,11 +29,18 @@ data "aws_iam_policy_document" "github_trust" {
       values   = ["sts.amazonaws.com"]
     }
 
+    # GitHub sends the subject in two possible shapes:
+    #   1. repo:ORG/REPO:ref:REF                       (classic)
+    #   2. repo:ORG@<org-id>/REPO@<repo-id>:ref:REF    (with immutable numeric IDs)
+    # Both are accepted. The "@*" wildcard is safe because GitHub org and repo
+    # names cannot contain "@", so it cannot match a different organisation.
     condition {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values = [for ref in var.allowed_branches :
-      "repo:${var.github_org}/${var.github_repo}:ref:${ref}"]
+      values = concat(
+        [for ref in var.allowed_branches : "repo:${var.github_org}/${var.github_repo}:ref:${ref}"],
+        [for ref in var.allowed_branches : "repo:${var.github_org}@*/${var.github_repo}@*:ref:${ref}"],
+      )
     }
   }
 }
