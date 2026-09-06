@@ -1,4 +1,4 @@
-module github.com/your-github-org/zt-devsecops-pipeline/app
+module github.com/zerotrust-lab/zt-devsecops-pipeline/app
 
 go 1.22
 

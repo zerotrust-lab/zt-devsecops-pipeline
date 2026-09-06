@@ -14,7 +14,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/your-github-org/zt-devsecops-pipeline/app/internal/handlers"
+	"github.com/zerotrust-lab/zt-devsecops-pipeline/app/internal/handlers"
 )
 
 const (
