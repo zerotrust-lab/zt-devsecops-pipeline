@@ -140,16 +140,23 @@ jobs:
           provenance: true
           sbom: false   # richer SBOM generated with Syft in Gate 4
 
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh \
+            | sh -s -- -b /usr/local/bin
+          trivy --version
+
       - name: Trivy scan - FAIL on CRITICAL/HIGH
-        uses: aquasecurity/trivy-action@0.24.0
-        with:
-          image-ref: ${{ env.ECR_REPOSITORY }}@${{ steps.build.outputs.digest }}
-          format: sarif
-          output: trivy.sarif
-          severity: CRITICAL,HIGH
-          ignore-unfixed: true
-          exit-code: "1"                 # non-zero => job fails => gate blocks
-          trivyignores: security/trivy/.trivyignore
+        env:
+          IMG: ${{ env.ECR_REPOSITORY }}@${{ steps.build.outputs.digest }}
+        run: |
+          trivy image \
+            --severity CRITICAL,HIGH \
+            --ignore-unfixed \
+            --ignorefile security/trivy/.trivyignore \
+            --format sarif --output trivy.sarif \
+            --exit-code 1 \
+            "$IMG"
 
       - name: Upload Trivy SARIF to GitHub Security
         if: always() && hashFiles('trivy.sarif') != ''
