@@ -45,7 +45,7 @@ terraform output -raw ecr_repository_url        # -> repo variable ECR_REPOSITOR
 cd ../app && go mod tidy && go test ./... -race
 
 # 3. Validate policy (Dev C)
-opa test policy/ -v        # 11 tests
+opa test policy/ --ignore '*.json' -v        # 11 tests
 
 # 4. Push and watch (Dev D)
 git push && gh run watch

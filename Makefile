@@ -22,7 +22,7 @@ sbom:                ## Generate SPDX + CycloneDX SBOMs (Gate 4 preview)
 	syft $(IMAGE) -o cyclonedx-json=sbom.cyclonedx.json
 
 policy:              ## Run Rego unit tests + fixtures (Gate 6 preview)
-	opa test policy/ -v
+	opa test policy/ --ignore '*.json' -v
 	conftest test policy/tests/fixtures/compliant.json --policy policy/ --all-namespaces
 
 verify-nonroot:      ## Prove the image runs as UID 65532 with no shell

@@ -219,7 +219,7 @@ sound on your machine and any later failure is your change, not the baseline.
 cd app && go mod tidy && go vet ./... && go test ./... -race -count=1 && cd ..
 
 # 2. Policy tests pass — expect 11 PASS
-opa test policy/ -v
+opa test policy/ --ignore '*.json' -v
 
 # 3. Dockerfile is clean
 docker run --rm -i hadolint/hadolint hadolint \

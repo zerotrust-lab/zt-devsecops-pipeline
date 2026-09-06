@@ -114,7 +114,7 @@ cloud access needed.
 
 ### Local check
 ```bash
-opa test policy/ -v                     # expect 11 tests, all pass
+opa test policy/ --ignore '*.json' -v                     # expect 11 tests, all pass
 conftest test policy/tests/fixtures/compliant.json --policy policy/ --all-namespaces
 conftest test policy/tests/fixtures/noncompliant.json --policy policy/ --all-namespaces
 

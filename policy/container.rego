@@ -1,6 +1,5 @@
-# METADATA
-# title: Container image compliance policy
-# description: Zero-Trust rules -- required fields present, non-root, approved base, digest-pinned, signed.
+# Container image compliance policy
+# Zero-Trust rules -- required fields present, non-root, approved base, digest-pinned, signed.
 package main
 
 import rego.v1
