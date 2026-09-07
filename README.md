@@ -81,3 +81,8 @@ tier for a ~15 MB image. Run `terraform destroy` when finished.
 
 See `docs/DAY0-SETUP.md` first, then `docs/TEAM.md` for the four-person split,
 daily checklist, and common blockers.
+
+
+## App & Container
+
+The Go microservice is built with a multi-stage Dockerfile: the first stage compiles the binary with the full Go toolchain, and the second stage copies only that binary into a `gcr.io/distroless/static-debian12` base, discarding everything else. The final image has no shell or package manager, and runs as non-root UID 65532 — verified via `docker inspect` and enforced independently by the OPA policy in `policy/container.rego`. Trivy scans (`--severity CRITICAL,HIGH --ignore-unfixed`) return 0 findings on both the Debian base and the compiled Go binary, since bumping Go from 1.22 to 1.26 rebuilt out 22 stdlib vulnerabilities that were statically linked into the binary rather than installed as OS packages.
