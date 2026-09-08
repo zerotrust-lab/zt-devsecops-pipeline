@@ -27,3 +27,10 @@ __pycache__/
 
 # OS
 .DS_Store
+
+# Internal working docs — kept locally, deliberately not in the repo
+docs/DAY0-SETUP.md
+docs/TEAM.md
+docs/*-HANDOVER.md
+docs/DEVD-RUNBOOK.md
+docs/PROGRESS.md
