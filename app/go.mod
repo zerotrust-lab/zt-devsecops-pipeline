@@ -2,10 +2,7 @@ module github.com/zerotrust-lab/zt-devsecops-pipeline/app
 
 go 1.26
 
-require (
-	github.com/prometheus/client_golang v1.18.0
-	golang.org/x/net v0.17.0
-)
+require github.com/prometheus/client_golang v1.18.0
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -15,6 +12,5 @@ require (
 	github.com/prometheus/common v0.45.0 // indirect
 	github.com/prometheus/procfs v0.12.0 // indirect
 	golang.org/x/sys v0.17.0 // indirect
-	golang.org/x/text v0.13.0 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
 )
