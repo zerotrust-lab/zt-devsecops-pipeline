@@ -8,7 +8,7 @@ git checkout -b "$BRANCH"
 
 echo ">> Writing a deliberately insecure Dockerfile that runs as root..."
 cat > build/Dockerfile.insecure <<'DOCKER'
-FROM golang:1.22-bookworm AS builder
+FROM golang:1.26-bookworm AS builder
 WORKDIR /src
 COPY app/ ./
 RUN CGO_ENABLED=0 go build -o /out/app .
